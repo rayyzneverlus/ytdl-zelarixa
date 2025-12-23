@@ -6,7 +6,7 @@ import uuid
 app = Flask(__name__)
 
 # =========================
-# PATH SETUP
+# PATH SETUP (FIX & STABIL)
 # =========================
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 FILE_DIR = os.path.join(BASE_DIR, "file")
@@ -22,6 +22,7 @@ DEFAULT_RES = 720
 def home():
     return jsonify({
         "status": "ok",
+        "service": "YTDL ZELARIXA API",
         "endpoints": {
             "mp3": "/download/mp3?url=YOUTUBE_URL",
             "mp4": "/download/mp4?url=YOUTUBE_URL&res=720"
@@ -49,11 +50,13 @@ def download_mp3():
         "format": "bestaudio/best",
         "outtmpl": output,
         "quiet": True,
-        "postprocessors": [{
-            "key": "FFmpegExtractAudio",
-            "preferredcodec": "mp3",
-            "preferredquality": "192",
-        }],
+        "postprocessors": [
+            {
+                "key": "FFmpegExtractAudio",
+                "preferredcodec": "mp3",
+                "preferredquality": "192",
+            }
+        ],
     }
 
     try:
@@ -121,7 +124,7 @@ def serve_file(filename):
 
 
 # =========================
-# LOCAL RUN
+# LOCAL / MANUAL RUN
 # =========================
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8080))
