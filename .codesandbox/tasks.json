@@ -1,0 +1,15 @@
+{
+  "setupTasks": [
+    {
+      "name": "Build Docker",
+      "command": "docker build -t app ."
+    }
+  ],
+  "tasks": [
+    {
+      "name": "Run App",
+      "command": "docker run -p 8080:8080 app",
+      "runAtStart": true
+    }
+  ]
+}
